@@ -1,0 +1,22 @@
+.reg_main{height:auto;background:#f0f0f0;overflow:hidden;margin-bottom:40px}
+.reg_inner{width:100%;max-width:500px;background:#fff;margin:0 auto;
+height:auto;overflow:hidden}
+.reg_inner_header{background:#fafafa;height:80px;float:left;width:100%;border-bottom:1px solid #f3f3f3}
+border-right:1px solid #f3f3f3;float:left;text-align:center;line-height:80px;color:#000;
+font-size:24px;cursor:pointer;background:#fff}
+.reg_mid_left{float:left;width:60%;height:auto;
+border-right:1px solid #f3f3f3}.reg_form{margin:40px auto;max-width:400px}
+.form-group{width:400px;margin-bottom:15px}.has-feedback{position:relative}.has-feedback .form-control{padding-right:42.5px}
+.form-control{display:block;width:100%;height:34px;padding:6px 12px 6px 55px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;
+background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,
+-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow 
+ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
+.kong10{height:10px}.link1{color:#a8a8a8}.kong20{height:20px}
+.login_btn{display:block;height:50px;background:#f66;border:none;width:100%;max-width:400px;color:#fff;border-radius:5px;font-size:18px}
+
+.has-feedback i{position:absolute;top:1px;line-height:22px;width:45px;text-align:center;
+padding:.7rem 0;border-radius:5px 0 0 5px;color:#CCC;font-size:1.2em;border-right:1px solid #CCC}
+	.btn-a{color: #8cafb5;}
+.active{color:red}
+.form-group input{width: 80%;    height: 3rem;}

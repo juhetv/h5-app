@@ -1,0 +1,30 @@
+.fed-goto-info {
+	position: fixed;
+	right: .5rem;
+	bottom: 80px;
+	z-index: 99;
+	width: 20rem;
+	height: 2rem;
+	text-align: right;
+}
+
+.fed-goto-info a,
+.fed-topi-back span {
+	margin: .2rem;
+	padding: .6rem;
+	/* width: 100%; */
+	color: #f0ad4e;
+}
+
+.fed-goto-info a {
+	box-shadow: 0 0.0625rem 0.25rem rgb(0 0 0);
+	font-size: 1.3rem;
+	margin-top: 0;
+	background-color: #5555ff;
+	border-radius: 1.2rem;
+}
+
+.mui-btn-warning {
+	margin: .3rem;
+	padding: .28rem;
+}

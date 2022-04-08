@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="referrer" content="never" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/dplayer/1.24.0/DPlayer.min.css" />
+		<link href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/mui.css" rel="stylesheet" />
+		<link href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/font-awesome.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/common.css" />
+		
+		<title></title>
+		<style>
+			.current_a {
+				color: red;
+			}
+
+			ul li {
+				float: left;
+			}
+
+			.img-shut {
+				width: 80%;
+			}
+		</style>
+	</head>
+	<body style="height:100%;background-color: #2b2a2a">
+		<div class="mui-content" style="max-width: 620px;margin: 0 auto;background-color: #2b2a2a; display:none ;" id="video-div">
+			<div class="mui-media-body m-title copy-on " style="color: #fff;" :data-clipboard-text="detailInfo.title">
+				<h3>{{detailInfo.title}}</h3>
+			</div>
+			<div class="mui-card" style="margin-top: 0;">
+				<div class="mui-card-content">
+					<div id="video-te" style="width: 100%;margin-bottom: 10px;margin-top: 0.5rem;"
+						v-if="detailInfo.playUrl!=''">
+						<div id="video" class="video-container"
+							:style="'margin-top: 0.5rem;margin-bottom: 0px;max-height: 32rem;min-height: '
+							+((detailInfo.channelName=='xiaoluoli')?'35rem':'15.3rem;')">
+
+						</div>
+						<div align="center" style="margin-bottom: 1.5rem;">
+
+							<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined  video-seek"
+								seek-type=0 seconds=200>
+								-200S
+							</button>
+							<button type="button" seek-type=0 seconds=60
+								class="mui-btn mui-btn-warning mui-btn-outlined  video-seek">
+								-60S
+							</button>
+							<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined  video-seek"
+								seek-type=1 seconds=60>
+								+60S
+							</button>
+							<button type="button" seek-type=1 seconds=200
+								class="mui-btn mui-btn-warning mui-btn-outlined  video-seek">
+								+200S
+							</button>
+							<button type="button" id="rate" class="mui-btn mui-btn-warning mui-btn-outlined ">
+								倍速(1)
+							</button>
+
+						</div>
+
+						<div align="center">
+							<button type="button" v-if="detailInfo.movieDomains!=null"
+								:class="'video-domain mui-btn mui-btn-warning'+(detailInfo.movieDomain==(vurl.va)?'':' mui-btn-outlined ')"
+								v-for="(vurl,index) in detailInfo.movieDomains" :current-value="vurl.va">
+								{{vurl.ke}}
+							</button>
+							
+						</div>
+						<!--mui-btn-outlined 未选中-->
+						<div align="center" style="margin: .2rem;">
+
+							<button type="button"
+								:class="'video-url mui-btn mui-btn-warning '+(vurl.va==detailInfo.playUrl?'':' mui-btn-outlined ')"
+								v-for="(vurl,index) in detailInfo.playInfoList" :current-value="vurl.va">
+								{{vurl.ke}}
+							</button>
+
+						</div>
+					</div>
+				<div class="mui-card-footer">
+					<p>请WIFI环境下观看，土豪随意。不要相信水印广告远离网络赌博。无法播放请使用夸克浏览器或者下载安装APP。</p>
+				</div>
+					<div id="v_img" style="text-align: center; ">
+						<img class="img-shut" style="width: 98%"
+							v-if="detailInfo.imgArray!=null" :data-preview-src="vimg"
+							data-preview-group="1" v-for="vimg in detailInfo.imgArray"
+							v-lazy="vimg"
+							onerror="this.src='./img/error.png'"
+							/>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="fed-goto-info">
+			<a id="favor-icon" class="fa fa-star-o" href="javascript:;"></a>
+			<a class="fa fa-repeat mui-icon-reload" atr="刷新"></a>
+			<!-- <a class="mui-icon mui-icon-pengyouquan" href="javascript:;"></a> -->
+			<a class=" fa fa-user-circle" id="io-test" href="javascript:;"></a>
+		</div>
+		<script src="https://cdn.staticfile.org/vue/2.0.0/vue.min.js"></script>
+		<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/vue-lazyload.js"></script>
+		<script src="https://cdn.staticfile.org/mui/3.7.1/js/mui.js"></script>
+		<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.staticfile.org/dplayer/1.24.0/DPlayer.min.js"></script>
+		<script type="text/javascript" src="https://cdn.staticfile.org/hls.js/1.0.2/hls.min.js"></script>
+		<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/util.js"></script>
+		
+		<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/common.js"></script>
+		<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-temp/config.js"></script> 
+		<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/favorite.js"></script>
+	
+		<script type="text/javascript">
+			Vue.use(VueLazyload, {
+				preLoad: 1.3,
+				error: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/thumb.png',
+				loading: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gif',
+				attempt: 1
+			});
+			$(function($) {
+				let txt = localStorage.getItem("video_item");
+				if (txt == null) {
+					mui.alert("影片不见了，请重新进来看吧");
+					window.location.href="home.html";
+					//mui.backPage();
+					return;
+				}
+				console.log(txt);
+				let shareData = new Vue({
+					el: '#video-div',
+					data: {
+						detailInfo: JSON.parse(txt),
+						member: getLoginSuccessLocaCache()
+					}
+				});
+				//sessionStorage.setItem("",shareData.detailInfo.channelName)
+				mui.init();
+				plusReady();
+				$("#video-div").show();
+				 
+				var video = null;
+				var playing = false;
+				// H5 plus事件处理
+				function plusReady() {
+
+					if (shareData.detailInfo.playUrl) {
+						dplayer = new DPlayer({
+							container: document.getElementById('video'),
+							video: {
+								url: 
+								shareData.detailInfo.movieDomain + shareData.detailInfo.playUrl
+								,
+								type: 'customHls',
+								loop: true,
+								autoplay: true,
+								pic: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gif',
+								customType: {
+									'customHls': function(video, player) {
+										const hls = new Hls();
+										hls.loadSource(video.src);
+										hls.attachMedia(video);
+									},
+								}
+							}
+						});
+						console.log(shareData.detailInfo.movieDomain + shareData.detailInfo.playUrl);
+						dplayer.play();
+						shareData.detailInfo.imgArray.push(shareData.detailInfo.cover)
+						sessionStorage.setItem("seek-time", 15);
+						dplayer.on('durationchange', function() {
+							if (dplayer.video.duration <= 0) {
+								return;
+							}
+							let timeKey = "time:" + shareData.detailInfo.id
+							let time = sessionStorage.getItem(timeKey);
+							if (time > 0) {
+								time = parseInt(time);
+								if (time < 3) {
+									return;
+								}
+								if(time>dplayer.video.duration-10){
+									sessionStorage.removeItem(timeKey);
+									return;
+								}
+								let currentTime = parseInt(dplayer.video.currentTime);
+								if(time>currentTime){
+									dplayer.seek(time);
+								}
+								
+							}
+						}, false);
+
+						dplayer.on('timeupdate', function(obj) {
+							let currentTime = parseInt(dplayer.video.currentTime);
+							if (currentTime < 0) {
+								return;
+							}
+							let forceTime = sessionStorage.getItem("force-seek-time")
+							forceTime = forceTime ? parseInt(forceTime) : 0;
+							if (forceTime > 0 && currentTime < forceTime) {
+								dplayer.seek(forceTime);
+								return;
+							}
+							let timeKey = "time:" + shareData.detailInfo.id;
+							//结束
+							if (dplayer.video.duration - currentTime < 4 && dplayer.video.duration -
+								currentTime > 0) {
+
+								sessionStorage.setItem(timeKey, null);
+								return;
+							}
+							if (currentTime > 3) {
+								//console.log(currentTime)
+								sessionStorage.setItem(timeKey, currentTime);
+							}
+
+						}, false);
+						dplayer.on('error', function() {
+							dplayer.notice("20S后没反应，尝试刷新或点击无法播放按钮", 5000)
+							/* postJSON(back_play_api + shareData.detailInfo.id, {}, "", function(res) {
+								
+							}, true); */
+							
+						}, false);
+						dplayer.on('ended', function() {
+							let timeKey = "time:" + shareData.detailInfo.id
+							sessionStorage.removeItem(timeKey);
+						}, false);
+						
+						
+						mui('body').on("tap", ".back-play", function() {
+							if(shareData.detailInfo.movieDomain == "back"){
+								dplayer.play();
+								return;
+							}
+							postJSON(back_play_api + shareData.detailInfo.id, {
+							}, "", function(res) {
+								if (res.ok) {
+									
+									$(".back-play").removeClass("mui-btn-outlined")
+									dplayer.notice("切换中请稍等", 6000)
+									dplayer.switchVideo({
+										url: res.content,
+										pic: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gi'
+									});
+									shareData.detailInfo.playUrl = res.content;
+									shareData.detailInfo.movieDomain = "back";
+									dplayer.play();
+								} else {
+									let mes = res.message||"正在准备备份地址,5秒后再试";
+									mui.toast(mes);
+								}
+
+							}, true);
+						});
+						mui('body').on("tap", ".video-domain", function() {
+							if (localStorage.getItem("video_item") == null) {
+								mui.alert("请重新进来看吧");
+								mui.backPage();
+							}
+							$(".back-play").addClass("mui-btn-outlined")
+							shareData.detailInfo.movieDomain = $(this).attr("current-value");
+							let parser = document.createElement('a');
+							parser.href = shareData.detailInfo.playUrl;
+							dplayer.notice("切换中请稍等", 6000)
+							let newurl = shareData.detailInfo.movieDomain + parser.pathname + parser.search;
+							console.log(newurl);
+							dplayer.switchVideo({
+								url: newurl,
+								pic: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gi'
+
+							});
+							dplayer.play();
+						})
+
+						mui('body').on("tap", ".fa-arrows-alt", function() {
+							dplayer.fullScreen.request("browser");
+							//dplayer.requestFullScreen(-90);
+						});
+						
+						
+						// 切换倍速
+						var ri = 0;
+						var ra = [1.0, 1.25, 1.5, 2];
+						mui('body').on('tap', '#rate', function() {
+							ri++;
+							if (ri >= ra.length) {
+								ri = 0;
+							}
+							dplayer.speed(ra[ri]);
+							document.getElementById('rate').innerText = '倍速(' + ra[ri] + ')';
+						});
+						mui('body').on("tap", ".video-url", function() {
+							if (localStorage.getItem("video_item") == null) {
+								mui.alert("影片不见了，请重新进来看吧");
+								mui.backPage();
+							}
+							let newurl = $(this).attr("current-value");
+							if (newurl == "NONE_ACTIVATE") {
+								alert("请先激活VIP");
+								/* copy_fun(share_video_url.replace("thisVid",shareData.detailInfo.id)
+									.replace("thisShareFrom",shareData.member.identityCode)
+								,"专属分享地址复制成功"); */
+								return;
+							}
+
+							if (newurl == "NONE_LOGIN") {
+								alert("请先登录");
+								redirectPage("left_content.html?code=login");
+								return;
+							}
+							$(".back-play").addClass("mui-btn-outlined")
+							dplayer.notice("切换中请稍等", 6000)
+							shareData.detailInfo.playUrl = newurl;
+							newurl = shareData.detailInfo.movieDomain + shareData.detailInfo.playUrl;
+							console.log(newurl);
+							dplayer.switchVideo({
+								url: newurl,
+								pic: 'http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gif'
+							});
+							dplayer.play();
+						})
+
+
+						mui('body').on('tap', '.video-seek', function() {
+							let currentTime = parseInt(dplayer.video.currentTime);
+							let seconds = $(this).attr("seconds");
+							seconds = parseInt(seconds);
+							let time = 0;
+							if ($(this).attr("seek-type") == 0) {
+								time = currentTime - seconds;
+							} else {
+								time = currentTime + seconds;
+							}
+							if (time <= 0) {
+								time = 0;
+							}
+							dplayer.seek(time);
+						});
+					}
+
+
+				}
+				
+				mui('body').on('tap', '.mui-icon-pengyouquan', function() {
+					if (shareData.member.identityCode == null) {
+						alert("请先登录");
+						return;
+					}
+					copy_fun(shareData.detailInfo.title.substring(0, 60) + " " + share_video_url.replace(
+							"thisVid", shareData.detailInfo.id)
+						.replace("thisShareFrom", shareData.member.identityCode), "专属分享地址复制成功");
+				});
+				mui('body').on("tap", ".fa-user-circle", function() {
+					redirectPage("left_content.html?code=user_center");
+				});
+				favorExist(favor_exist_api,shareData.detailInfo.id,shareData.detailInfo.channelName);
+				mui('body').on('tap', '#favor-icon', function() {
+					favorUpdate(favor_update_api+shareData.detailInfo.id
+					+"&channelName="+shareData.detailInfo.channelName)
+				});
+				
+			})
+		</script>
+	</body>
+</html>

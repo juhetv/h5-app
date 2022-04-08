@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="referrer" content="never" />
+		<!--91福利,92福利,视频-->
+		<title
+			th:text="${movieNetDetailRes.title}+',HD,92福利社-92福利社影院_92福利社天堂_2022最新最好看電影盡在92福利社影院-最全最新的国产亚洲欧美日韩无码免费高清美女图片'">
+		</title>
+		<meta name="keywords"
+			th:content="${movieNetDetailRes.title}+',91福利,92福利社,電影天堂影院,最新電影,最新電視劇,迅雷電影下載,青春電影電視劇迅雷下載,免費成人視頻,美女图片,巨乳中字人妻丝袜诱惑好多水好爽'" />
+		<meta name="description"
+			th:content="${movieNetDetailRes.title}+',92福利社提供最新的高清電影在線觀看和迅雷下載（含青春電影迅雷下載）,92福利社提供快速免費的成人电影与视频。 包括热辣性感女孩与xxx視頻,美女图片。92福利社爭做最好最專業的在線福利影院！(http://www.meitue.shop)'" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/css/DPlayer.min.css" />
+		<link rel="stylesheet"
+			href="https://gejiba.com/down.php/d9ce564065739abd1423d91a28024756.css">
+		<link rel="stylesheet"
+			href="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/css/float-btn.css" />
+		<link rel="stylesheet"
+			href="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/css/video-detail.css" />
+		<link rel="icon" href="data:;base64,="/>
+	</head>
+
+	<body>
+		<div class="main">
+			<!--mui-bar-transparent-->
+			<input type="hidden" id="header" class="" th:channelName="${movieNetDetailRes.channelName}"
+				th:data-id="${movieNetDetailRes.id}" />
+			
+			<div class="mui-content index-body-color main mui-content-padded"
+				style="text-align: center; min-height: 99vh">
+				<div id="" class="beforeVideoStartBg" th:if="not ${vipAuth}">
+					<img th:src="${movieNetDetailRes.cover}" height="100%" width="100%" class="blurt">
+					<div class="unLoginBox login-vid-tip">
+						<p class="textLine" th:if="not ${isLogin}">免费注册 精彩视频免费看</p>
+						<p class="textLine" th:if="not ${isLogin}">赶快加入 体验更多精彩</p>
+						<a type="button" th:if="not ${isLogin}" href="http://www.meitue.shop/left_content.html?code=login"
+							target="_blank" class="login-vip-btn mui-btn mui-btn-warning">登录/注册</a>
+						<p class="textLine" th:if="${isLogin} and not ${vipAuth}">赶快激活VIP 体验更多精彩</p>
+						<a type="button" th:if="${isLogin} and not ${vipAuth}"
+							href="http://www.meitue.shop/left_content.html?code=user_center" target="_blank"
+							class="login-vip-btn mui-btn mui-btn-warning">去激活</a>
+					</div>
+				</div>
+
+				<div class="mui-card-content" id="video-div">
+					<div id="video-te" 
+					th:video-src="${movieNetDetailRes.playUrl}"
+					th:video-domain="${movieNetDetailRes.movieDomain}" style="width: 100%;margin-bottom: 10px; display: ;">
+						<div id="video" th:if="${vipAuth}"
+							class="video-container" style="background-color: #243241; 
+							margin-bottom: 0px;max-height: 37rem;">
+						</div>
+					</div>
+
+					<div align="center" th:if="not ${#lists.isEmpty(movieNetDetailRes.movieDomains)}">
+						<button type="button"
+							class="video-domain mui-btn mui-btn-warning mui-btn-outlined"
+							th:each="item:${movieNetDetailRes.movieDomains}"
+							th:current-value="${item.va}" th:text="${item.ke}">
+						</button>
+					</div>
+					<!--mui-btn-outlined 未-->
+					<div align="center" style="margin: .2rem;"
+						 th:if="not ${#lists.isEmpty(movieNetDetailRes.playInfoList)}">
+						<button type="button" 
+							class="video-url mui-btn mui-btn-warning  mui-btn-outlined"
+							th:each="item:${movieNetDetailRes.playInfoList}" th:current-value="${item.va}" th:text="${item.ke}"> 
+						</button>
+
+					</div>
+					
+					<div style="border-top: 1px solid #a5a5a5;">
+						<h1 class="m-title" th:text="${movieNetDetailRes.title}"></h1>
+						<ul style="list-style: none;    padding-left: 10px;">
+							<li class="tag-li" style="float: left;margin-right: 10px; background-color: #959ea7;" th:each="tag:${movieNetDetailRes.tagArray}" th:text="${tag}"></li>
+						</ul><br>
+						<img class="img-shut" th:title="${movieNetDetailRes.title}" 
+							th:if="${vipAuth}"
+							th:alt="${movieNetDetailRes.title}"
+							th:src="${movieNetDetailRes.cover}"
+							  th:data-preview-src="vimg" data-preview-group="1"
+							  onerror="this.src='http://r97hw9kog.hn-bkt.clouddn.com/static-lib/img/error.png'" />
+					</div>
+
+				</div>
+				<!--style="border-top: 1px solid #a5a5a5;"-->
+				<div class="mui-card-footer" >
+					<p>请WIFI环境下观看，土豪随意，不要随便相信视频中的水印广告，远离网络赌博。</p>
+				</div>
+			</div>
+			<div class="fed-goto-info">
+				<a class="mui-icon mui-icon-star" id="favorite-icon" href="javascript:;"></a>
+				<a class="mui-icon mui-icon-contact" href="http://www.meitue.shop/left_content.html?code=user_center" target="_blank"></a>
+			</div>
+		</div>
+	</body>
+	<script src="http://cdn.staticfile.org/js-cookie/2.2.1/js.cookie.js"></script>
+	<script src="http://cdn.staticfile.org/jquery/3.0.0/jquery.min.js"></script>
+	<script src="http://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+	<script src="http://www.meitue.shop/dplayer/aper-210/config.js"></script>
+	<script src="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/js/mui.js"></script>
+	<script src="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/js/favorite.js"></script>
+	<!--https://www.dcloud.net.cn/hellomui/js/mui.min.js-->
+	
+	<script src="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/js/DPlayer.min.js" th:if="${vipAuth}"></script>
+	<script type="text/javascript" src="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/js/hls.min.js"
+			th:if="${vipAuth}"></script>
+	<script type="text/javascript" src="http://r97hw9kog.hn-bkt.clouddn.com/static-lib/js/video-detail.js" 
+		th:if="${vipAuth}"></script>
+</html>

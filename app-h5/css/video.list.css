@@ -1,0 +1,66 @@
+
+
+.v-search-video-time {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #fff;
+	background-color: #58b59d;
+}
+
+.a_div_img {
+	 max-height: 16.5rem; 
+	overflow: hidden;
+	position: relative;
+	max-width: 99%;
+	text-align: center;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-position: center;
+	background-size: cover;
+}
+
+.m-li-img {
+	display: block;
+	background: url(http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/img/lazy.gif) no-repeat center center;
+	background-position: 50% 10%;
+	background-size: cover;
+	height: 10rem;
+	width: 100%;
+	
+	object-fit: cover;
+}
+
+.mui-media {
+	margin: 8px 2px 10px 1px;
+	padding: 0 5px 0 5px;
+	width: 100%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+	border-bottom: 1px solid rgba(39, 48, 57, .1);
+	/* float: left; */
+}
+
+.mui-media-half {
+	margin: 2px 2px 10px 1px;
+	/* padding: 4px 4px 4px 4px; */
+	width: 49.1%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+	border-bottom: 1px solid rgba(39, 48, 57, .1);
+	float: left;
+}
+
+.mb-main {
+	width: 100%;
+	color: black;
+}
+
+.click_li {
+	text-align: center;     
+	position: relative;
+}

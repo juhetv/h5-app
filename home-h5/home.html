@@ -1,0 +1,230 @@
+<!DOCTYPE html >
+<html >
+
+		<head>
+			<meta charset="utf-8">
+			<meta name="keywords" content="2022年最新高清免费电影在线观看-好看的电影-经典电影排行榜-555电影网" />
+			<meta name="description" content="555电影（www.555dy.com）为您提供蜘蛛侠：英雄无归的剧情介绍:" />   
+			<meta name="renderer" content="webkit|ie-comp|ie-stand">
+			<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+			<meta name="apple-mobile-web-app-capable" content="yes">
+			<meta name="apple-mobile-web-app-status-bar-style" content="black">
+			<title></title>
+			<link rel="stylesheet" href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/css/mui.css">
+			<link rel="stylesheet" href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/css/home.css">
+			<style>
+
+			</style>
+		</head>
+
+		<body>
+			<div class="main">
+				<header class="mui-bar mui-bar-nav mui-main-color main">
+					<a id="menu_left_a" href="#offCanvasSide"
+						class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<a class="mui-icon mui-icon-reload mui-pull-right" atr="刷新"></a>
+					<a class="mui-icon mui-icon-navigate mui-pull-right" atr="跳页" style="display: ;"></a>
+					<a class="mui-icon mui-action-menu mui-icon-search mui-pull-right" atr="搜索" style="display: ;"></a>
+
+					<h1 class="mui-title page-title"></h1>
+				</header>
+				<div id="slider" class="mui-slider mui-main-color main" style="top: 40px;">
+					<div id="slider-channel" class="mui-scroll-wrapper 
+						mui-slider-indicator mui-segmented-control  
+						mui-segmented-control-inverted">
+						<div class="mui-scroll ">
+							<a class="mui-control-item " data-channel="norm">体育1</a>
+							<a class="mui-control-item mui-active" data-channel="uufl">体育2</a>
+							<a class="mui-control-item" data-channel="zhai">体育2</a>
+							<a class="mui-control-item" data-channel="sifa">体育2</a>
+							<a class="mui-control-item" data-channel="xiao">体育2</a>
+							<a class="mui-control-item" data-channel="taos">体育2</a>
+							<a class="mui-control-item" data-channel="feis">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育2</a>
+							<a class="mui-control-item" data-channel="smmy">体育222</a>
+						</div>
+					</div>
+					<div id="slider-cates" class="mui-scroll-wrapper
+						mui-slider-indicator mui-segmented-control  
+						mui-segmented-control-inverted">
+						<div class="mui-scroll">
+							<a class="mui-control-item" :data-type="item.type"
+								v-for="(item,index) in categoryData">收藏</a>
+							<a class="mui-control-item" :data-type="item.type"
+								v-for="(item,index) in categoryData">最新</a>
+						</div>
+					</div>
+				</div>
+				<div  class="mui-content index-body-color main">
+					<div class="index-body-color" id="context_div">
+						
+						<div  class="item-detail">
+							<div class="mui-tip"
+								>
+								<span class="iconfont icon-fanhuidingceng">推荐</span>
+							</div>
+							<div th:each="item : ${movieNetSimpleResList} " class="mui-media mui-col-xs-6" >
+								<div class="media-div"  th:style="'height: '+(${vertical}?16:9)+'rem;'"
+									>
+									<a th:href="'http://127.0.0.1:8091/th/detail-'+${item.id}+'.html'" 
+									>
+										<img class="media-cover" th:data-id="${item.id}" th:src="${item.cover}"
+											onerror="this.src='http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/img/error.png'" />
+									</a>
+									<!--target="_blank"-->
+									<div   class="mui-slider-title media-title" >
+										<h2 class="media-name" th:text="${item.title}"></h2>
+										<div class="author" th:text="${item.movieCode}"></div>
+										<div class="time" th:text="${item.publishDay}"><i class="fa fa-calendar"></i></div>
+									</div>
+								</div>
+							</div>
+							
+							<!--视频列表end-->
+						</div>
+						
+						<div id="" v-for="pageData in pageDatas " class="item-detail">
+							<div class="mui-tip"
+								 >
+								<span class="iconfont icon-fanhuidingceng">{{pageData.tip}}</span>
+							</div>
+							<div v-for="item in pageData.content" class="mui-media mui-col-xs-6" >
+								<div class="media-div" href="javascript:;" :style="'height: '+(vertical?16:9)+'rem;'"
+									 >
+									<a :href="'http://127.0.0.1:8091/th/detail-'+item.id+'.html'">
+										<img class="media-cover" :data-id="item.id" :src="item.cover"
+											:style="'min-height: '+(vertical?16:8)+'rem;border-radius: 0.3rem;'"
+											onerror="this.src='http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/img/error.png'" />
+									</a>
+									<div  class="mui-slider-title media-title" >
+										<h2 class="media-name">{{item.title}}</h2>
+										<div class="author">{{item.movieCode}}</div>
+										<div class="time"><i class="fa fa-calendar"></i>{{item.publishDay}}</div>
+									</div>
+								</div>
+							</div>
+							
+							<!--视频列表end-->
+						</div>
+
+						<div class="mui-pull-bottom-tips">
+							<div class="mui-pull-bottom-wrapper"><span class="mui-pull-loading">正在加载中</span></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- <script src="./js/mui.min.js"></script> -->
+			<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/js/vue.min.js"></script>
+			<script src="https://cdn.staticfile.org/jquery/3.0.0/jquery.min.js"></script>
+			<script>
+				var moviePageVue = new Vue({
+					el: '#context_div',
+					data: {
+						vertical: false,
+						pageDatas: new Array(),
+						isLoading:false
+					}
+					/* mounted() {
+						loadPage(0, "norm");
+					} */
+				});
+				$(window).scroll(function() {
+					
+					let totalHeight =  parseFloat( $(window).height() ) +  parseFloat( $(window).scrollTop() ); //浏览器的高度加上滚动条的高度
+					
+					if ( $(document).height() <= totalHeight ) { //当文档的高度小于或者等于总的高度时，开始动态加载数据
+						if(moviePageVue.isLoading){
+							//return;
+						}
+						console.log("滚动条到顶部的垂直高度：" +  $(window).scrollTop() );
+						console.log("页面的文档高度：" +  $(document).height() );
+						console.log("浏览器的高度：" +  $(window).height() );
+						console.log("totalHeight:"+totalHeight);
+						moviePageVue.isLoading = true;
+						try{
+							loadNextPage()
+						}catch(e){
+							
+						}
+						
+					}
+					
+				});
+				function loadNextPage(){
+					let pageNum = parseInt(sessionStorage.getItem("pageNum") || "1");
+					loadPage(pageNum+1)
+				}
+				function loadPage(pageNum) {
+					let channel = "uufl";
+					let postData = {
+						"favorite": 0,
+						"pageNum": pageNum,
+						"pageSize": 24,
+						"keyword":"",
+						"cate":"",
+						"tag":""
+					}
+					/* $(".mui-active").each(function(activeEle){
+						let thisChannel = activeEle.getAttribute("data-channel");
+						if(thisChannel){
+							channel = thisChannel;
+						}else{
+							//type=3keyword,type=2tag  1canme 0all，-1收藏
+							let dataType = activeEle.getAttribute("data-type");
+							let valueText = activeEle.innerText
+							activeEle.getAttribute("data-type");
+							if(type==2){
+								postData.tag=valueText;
+							}else if(type==1){
+								postData.cate=valueText;
+							}else if(type==-1){
+								postData.favorite=1;
+							}
+						}
+					}); */
+					
+					
+					$.ajax(
+						{
+							url:'http://127.0.0.1:8091/movie-net/page',
+							type:'post',
+							dateType:'json',
+							beforeSend: function(xhr) {
+								//xhr.setRequestHeader("organId:'1333333333'");
+							},
+							headers:{'Content-Type':'application/json;charset=utf8',"m-channel": channel},
+							data:JSON.stringify(postData),
+							success:function(res){
+								console.log("sucess");
+								let pageOne = {};
+								pageOne.content = res.content;
+								moviePageVue.vertical = res.message=="1"
+								//pageOne.content[0].cover = pageOne.content[0].cover+".jpg";
+								//console.log(res);
+								pageOne.tip = "第" + pageNum + "页";
+								moviePageVue.pageDatas.push(pageOne);
+								sessionStorage.setItem("pageNum", pageNum);
+								moviePageVue.isLoading = false;
+							},
+							error:function(data){
+								console.log("error");
+								moviePageVue.isLoading = false;
+							}
+						}
+					);
+					
+				}
+			</script>
+		</body>
+
+
+
+
+	</html>

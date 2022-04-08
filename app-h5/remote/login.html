@@ -1,0 +1,276 @@
+<style>
+.reg_main{height:auto;background:#f0f0f0;overflow:hidden;margin-bottom:40px}
+.reg_inner{width:100%;max-width:500px;background:#fff;margin:0 auto;
+height:auto;overflow:hidden}
+.reg_inner_header{background:#fafafa;height:80px;float:left;width:100%;border-bottom:1px solid #f3f3f3}
+border-right:1px solid #f3f3f3;float:left;text-align:center;line-height:80px;color:#000;
+font-size:24px;cursor:pointer;background:#fff}
+.reg_mid_left{float:left;width:60%;height:auto;
+border-right:1px solid #f3f3f3}.reg_form{margin:40px auto;max-width:400px}
+.form-group{width:400px;margin-bottom:15px}.has-feedback{position:relative}.has-feedback .form-control{padding-right:42.5px}
+.form-control{display:block;width:100%;height:34px;padding:6px 12px 6px 55px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;
+background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,
+-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow 
+ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}
+.kong10{height:10px}.link1{color:#a8a8a8}.kong20{height:20px}
+.login_btn{display:block;height:50px;background:#f66;border:none;width:100%;max-width:400px;color:#fff;border-radius:5px;font-size:18px}
+
+.has-feedback i{position:absolute;top:1px;line-height:22px;width:45px;text-align:center;
+padding:.7rem 0;border-radius:5px 0 0 5px;color:#CCC;font-size:1.2em;border-right:1px solid #CCC}
+	.btn-a{color: #8cafb5;}
+.active{color:red}
+.form-group input{width: 80%;    height: 3rem;}
+</style>
+<link rel="stylesheet" href="./css/login.css" />
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+
+<div class="reg_main" id="content-login-div">
+	<!-- <div class="reg_inner" id="reg_inner_main" style="display: block;">
+		<div class="rih_left2" id="member-ele">
+			注册
+		</div>
+		<div class="rih_left2" id="point-ele">
+			登录
+		</div>
+	</div> -->
+	<div class="reg_mid">
+		<div class="reg_mid_left" id="login-div" style="    display: ;">
+			<div class="reg_form">
+				<div class="form-group has-feedback">
+					<input type="number" class="form-control" id="login-mobile" name="login-mobile" placeholder="手机号码" maxlength="20"
+					 value="" style="padding: 6px 12px 6px 55px;">
+					<i class="fa fa-user">
+					</i>
+				</div>
+
+				<div class="form-group has-feedback login-ele" id="share-div" style="display: none;">
+					<input type="text" style="padding: 6px 12px 6px 55px; " id="share-input" maxlength="32" class="form-control" name="login-pwd"
+					 placeholder="邀请码,没有可以为空,填写有福利">
+					<i class="fa fa-share-alt">
+					</i>
+				</div>
+				<div class="form-group has-feedback" id="pwd-div">
+					<input type="password" id="login-pwd" style="padding: 6px 12px 6px 55px;" maxlength="32" class="form-control" name="login-pwd"
+					 placeholder="登录密码">
+					<i class="fa fa-key">
+					</i>
+				</div>
+				<div class="form-group has-feedback login-ele" style="display: none ;" id="vcode-div">
+					<input id="verifyNumber-input" style="width: 50%;float: left;" maxlength="32" class="form-control"
+					 name="verifyNumber-input" placeholder="验证码">
+					<button name="login-wp-submit" id="vcode-wp-submit" style="height:3rem; margin-left: 10px;" class="">
+						获取验证码
+					</button>
+				</div>
+
+				<div class="kong20">
+				</div>
+				<button name="login-wp-submit" id="wp-submit" class="login_btn">
+					马上登录
+				</button>
+			</div>
+		</div>
+		<div class="affirmMobile_div reg_mid_left" style="display: ;">
+
+			<div style="padding: 0 20px 20px 20px;line-height: 30px;size: 20px;">
+				<a id="login-a" class="btn-a  active" href="">登录</a> /
+				<a id="register-a" class="btn-a " href="">注册</a> /
+				<a id="reset-pwd-a" class="btn-a " href="">忘记密码</a> /
+				<p>
+					<p>
+						<p>
+							联系客服： <a id="jumpToPotato" href="">potato聊天,点击下载</a>
+							<p>
+								+添加客服好友@timimi，订阅频道@fuli92，群组@mmfuli
+			</div>
+
+		</div>
+
+	</div>
+	<div>
+
+	</div>
+</div>
+
+<script src="http://cdn.staticfile.org/js-cookie/2.2.1/js.cookie.js"></script>
+<script>
+	let potatourl = "https://www.potapp.app/?lang=zh_CN";
+	mui('body').on("tap", "#jumpToPotato", function() {
+		if (typeof plus != "undefined") {
+			plus.runtime.openURL(potatourl);
+		} else {
+			window.open(potatourl);
+		}
+
+	});
+	mui('body').on("tap", "#reset-pwd-a", function() {
+		$(".btn-a").removeClass("active");
+		$(this).addClass("active");
+		showResetPwd();
+	});
+	mui('body').on("tap", "#login-a", function() {
+		$(".btn-a").removeClass("active");
+		$(this).addClass("active");
+		showLogin();
+	});
+	mui('body').on("tap", "#register-a", function() {
+		$(".btn-a").removeClass("active");
+		$(this).addClass("active");
+		showRegister();
+	});
+
+	function showRegister() {
+		$("#wp-submit").text("马上注册");
+		$("#vcode-div").show();
+		$("#login-pwd").attr("placeholder", "登录密码");
+		$("#login-pwd").attr("type", "text")
+	}
+
+	function showResetPwd() {
+		$("#wp-submit").text("重置密码");
+		$("#vcode-div").show();
+		$("#login-pwd").val("");
+		$("#login-pwd").attr("placeholder", "新密码");
+		$("#login-pwd").attr("type", "text")
+	}
+
+	function showLogin() {
+		$("#login-pwd").attr("type", "password")
+		$("#wp-submit").text("马上登录");
+		$("#vcode-div").hide();
+		$("#verifyNumber-input").val("");
+		$("#login-pwd").attr("placeholder", "登录密码");
+	}
+	mui('body').on("tap", "#vcode-wp-submit", function() {
+		var mobile = $("#login-mobile").val() || "";
+		if (mobile.length != 11) {
+			mui.toast("请输入正确的手机号码");
+			return false;
+		}
+		
+		postJSON(send_sms_api + "?phoneNumber=" + mobile, {}, "",
+			function(data) {
+				if (data.status != 0) {
+					mui.toast(data.message);
+					return false;
+				} else {
+					alert(data.content);
+				}
+			}
+		);
+	});
+
+	mui('body').on("tap", "#wp-submit", function() {
+		$(this).focus();
+		var username = $("#login-mobile").val() || "";
+		if ((username.length != 11 && username.length != 5)) {
+			mui.toast("请输入正确的手机号码");
+			return false;
+		}
+		let pwd = $("#login-pwd").val() || "";
+		if (pwd.length < 4) {
+			mui.toast("请输入正确的密码,至少4位");
+			return false;
+		}
+		/*if (pwd) {
+			pwd = $.md5(pwd);
+		}*/
+		let code = $("#verifyNumber-input").val() || "";
+		if ($(this).html().indexOf("登录") < 0) {
+			if (code.length < 1) {
+				mui.toast("请输入验证码");
+				return false;
+			}
+		}
+
+
+		/* if (inviterCode) {
+			inviterCode = $("#share-input").val() || "";
+		} */
+		var json_data = {
+			"mobile": username,
+			"pwd": pwd,
+			"verifyNumber": code
+		};
+		postJSON(login_register_reset_api, json_data, "",
+			function(data) {
+				if (typeof plus != "undefined") {
+					plus.nativeUI.closeWaiting();
+				}
+
+				mask.close(); //关闭遮罩层
+				if (data.status!=0) {
+					mui.toast(data.message);
+					return false;
+				}
+				let token = data.content;
+				if (token) {
+					localStorage.removeItem("video_item");
+					setToken(token);
+					
+					closeWb(token);
+					
+					//changePage("index.html");
+				} else {
+					mui.toast("操作成功，赶紧登录吧");
+					showLogin();
+					return;
+				}
+
+				//mui.alert("登录成功" + ((code == "") ? code : (",账号密码已设置为" + code + ",请牢记")));
+				//redirectPage("index.html");
+			});
+	});
+function closeWb(token){
+    
+    if (typeof plus != "undefined") {
+        //localStorage.setItem()
+		alert("登录成功,请返回后刷新页面");
+        let wb = plus.webview.currentWebview();
+        let opener1 = wb.opener();
+        opener1.reload();
+        wb.close();
+    }else{
+		alert("登录成功,请返回后刷新页面");
+		Cookies.set('member-token', token, { expires: 30, path: '',domain:".meitue.shop" });
+   		redirectPage("http://www.meitue.shop/home.html")     
+//mui.backPage();
+        ///window.close();
+        //window.history.back(-1);
+	}
+	
+	
+	//
+	/*let opener2 = opener1==null?null:opener1.opener();
+	let opener3 = opener2==null?null:opener2.opener();
+	let opener4 = opener3==null?null:opener3.opener();
+	closeThis(opener4);
+	closeThis(opener3);
+	closeThis(opener2);
+	closeThis(opener1);
+	plus.webview.currentWebview().close();*/
+	
+	
+	//mui.backPage();
+}
+
+function closeThis(wb){
+	try{
+		console.log(JSON.stringify(wb));
+		if(wb.id=="HBuilder"){
+			
+			return;
+		}
+		if(wb.id.indexOf("video_info_app")>=0){
+			wb.reload()
+		}
+	
+		
+	}catch(e){
+		
+	}
+	
+	
+}
+</script>

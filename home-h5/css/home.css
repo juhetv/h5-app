@@ -1,0 +1,123 @@
+.mui-bar a {
+	color: white;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	color: red;
+}
+
+.media-name {
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.2;
+	color: #fff700;
+	display: -webkit-box;
+	word-wrap: break-word;
+	white-space: normal;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	margin-top: 1px;
+	margin-bottom: 2px;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+	padding: 0 5px 0 5px;
+}
+
+
+
+.mui-slider-title .author,
+.time {
+	display: inline-block;
+	font-size: 11px;
+	bottom: 1px;
+	width: 50%;
+}
+
+.mui-slider-title {
+	margin-top: 3rem;
+	width: 99%;
+}
+
+.mui-slider-title .author {
+	float: right;
+}
+
+
+.mui-col-xs-6 {
+	width: 50%;
+	padding: 1px 3px 8px 3px;
+}
+
+.mui-media {
+	font-size: 14px;
+	color: #ccc;
+}
+
+.media-cover {
+	min-height: 7rem;
+	max-height: 16rem;
+	height: 100%;
+	width: 100%;
+	border-radius: 0.2rem;
+}
+
+.media-title {
+	line-height: 16px;
+	opacity: .6;
+	height: 2.4rem;
+	/* padding: 1px 5px 1px 0px; */
+	text-indent: 4px;
+	/* bottom: 0px; */
+}
+
+.media-name {
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.2;
+	color: #fff700;
+	display: -webkit-box;
+	word-wrap: break-word;
+	white-space: normal;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	margin-top: 1px;
+	margin-bottom: 2px;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+	padding: 0 5px 0 5px;
+}
+
+.page-tip {
+	margin-left: .4rem;
+	color: #f9c700;
+	position: unset;
+	font-size: 16px;
+}
+
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #9fa5ba;
+	font-size: 15px;
+	line-height: 40px;
+	color: #ffff00;
+}
+
+.item-detail {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.media-div {
+	height: 17rem;
+	background: url(http://127.0.0.1:8848/aper-h5/img/error.png) 0px -30px repeat;
+	background-size: 7rem 15rem;
+}
+.mui-tip{
+	margin-left: .4rem;color: #f9c700;position: unset; font-size: 12px;width: 100%;
+}

@@ -1,0 +1,247 @@
+<div class="reg_main" id="content-member-div">
+	<div class="reg_inner" id="reg_inner_main" style="display: ;">
+		<div class="reg_inner_header">
+			<div class="rih_left2" id="member-ele">
+				我的
+			</div>
+
+		</div>
+	</div>
+	<div class="reg_mid">
+		<div class="mui-card member-ele">
+			<div class="mui-card-content">
+				<div class="mui-card-content-inner">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<div style="display: inline-flex;">
+								<div style="width: 60px;">
+									<img style="border-radius: 45%;width: 100%;" src="https://s.pc.qq.com/tousu/img/20211022/4878503_1634886399.jpg" />
+								</div>
+								<div style="width:250px; margin-left: 30px;">
+									<span style="font-size: 18px;">hi ~ {{member.nickname}}，欢迎回来。</span>
+									<p style="margin-top: 10px;"  v-if="member.mobile!=null" class="copy-on" :data-clipboard-text="'92福利社你懂的福利http://meitue.shop/dplayer.html?playKey=8b6cb3'+' \n使用邀请码'+member.identityCode+'可享受VIP'" v-if="member.identityCode!=null">
+										邀请码{{member.identityCode}},点击复制
+									</p>
+
+
+
+								</div>
+							</div>
+						</li>
+
+						<li class="mui-table-view-cell">
+							<span style="margin-right: 2rem;" v-if="member.mobile!=null&&member.mobile!=''">
+								手机:{{member.mobile}}
+							</span>
+							<span style="margin-right: 2rem;color:red"
+								  id="bandMobile"
+								  v-if="member.mobile==null||member.mobile==''">
+								 点击登录
+							</span>
+
+							<span v-if="member.point>0" class="point-span">
+								积分:{{member.point}} ,可兑换VIP
+							</span>
+
+						</li>
+						<li class="mui-table-view-cell" style="color:Red">
+							<span style="margin-right: 0rem;" v-if="member.vipBool">
+								<i class="fa fa-calendar-check-o" aria-hidden="true"></i>VIP到期时间:{{member.expireTime}}
+							</span>
+							<span v-if="!member.vipBool">
+								已过期，兑换VIP不限制观看
+							</span>
+						</li>
+
+						<li class="mui-table-view-cell" style="display:">
+
+							<input type="text" style="width: 80%;padding: 4px 5px;height: 2rem;font-size: 14px;margin:0 5px"
+								   class="mui-input-clear" placeholder="请输入积分、邀请码或者兑换卡号" data-input-clear="5" id="rechargeCardCode">
+
+							<button type="button" class="mui-btn mui-btn-primary" style="margin-left: .5rem;" id="submitExchangeCard">提交</button>
+
+						</li>
+						<li class="mui-table-view-cell" id="daili-li">
+							<p>发送邀请码给他人如果被使用将获取2天VIP</p>
+						</li>
+						<li class="mui-table-view-cell" id="vip-card-li" >
+							<p>加入土豆群可免费获取兑换卡，@mmfuli</p>
+						</li>
+
+						<!-- <li class="mui-table-view-cell hidden" data-type="alipay" >
+							<font style="color:red">支付不定期开启</font>
+						</li> -->
+
+
+
+						<!--暂停了，晚点再来吧，开通VIP请联系土豆客服@timimi
+						<li tid="3196" class="mui-table-view-cell paytid " data-type="alipay" >
+							<p>支付宝支付30元=30天VIP(1元/天)</p>
+						</li>
+-->
+						
+
+
+
+						<div class="mui-slider-item" id="member_di" style="padding: 4px;text-align: center;display: none;">
+							<img  style="width: 49%;"/>
+							
+						</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+	</div>
+</div>
+<div id="pay-div" style="display:none"></div>
+<script>
+    var ve = new Vue({
+        el: '#content-member-div',
+        data: {
+            "member": {"mobile":null},
+            "gifs": [],
+            "pointList": []
+        }
+    });
+    if (window.location.href.indexOf("http") >= 0) {
+        init();
+    } else {
+        mui.plusReady(function() {
+            init();
+        });
+    }
+
+    //mui.plusReady(function() {init();});
+    function init() {
+        postJSON(member_info_api, {}, '加载中', function(res) {
+            if (res.status==0) {
+                ve.member = res.content;
+				
+            }else{
+                ve.member = null;
+            }
+        }, true);
+
+        $(".mui-card").hide();
+        var showEle = getUrlParms("showEle");
+        if (showEle) {
+            $("." + showEle).show();
+        } else {
+            $("#member-ele").addClass("activated");
+            $(".member-ele").show();
+        }
+    }
+    mui('body').on("tap", "#bandMobile", function() {
+        redirectPage("left_content.html?code=login");
+    });
+    mui('body').on("tap", ".point-span", function() {
+        alert("兑换框中输入积分数量，点击提交，10个积分=1天VIP");
+    });
+    mui('body').on("tap", "#bandMobile", function() {
+        redirectPage("left_content.html?code=login");
+    });
+    mui('body').on("longtap", ".rih_left2", function() {
+        clearMemberStorage();
+        localStorage.removeItem("x_access_token");
+        ve.member.mobile=null;ve.member.point=0;ve.member.vipBool=false;
+    });
+    mui('body').on("tap", "#daili-li", function() {
+        //alert("首先你得安装土豆聊天,然后咨询客服@timimi");
+        //plus.runtime.openURL("https://m.lynnconway.me/mmfuli");
+
+    });
+    mui('body').on("tap", "#vip-card-li", function() {
+        //plus.runtime.openURL("https://m.lynnconway.me/mmfuli");
+
+    });
+    mui('body').on("tap", "#submitExchangeCard", function() {
+        let rechargeCardCode = $("#rechargeCardCode").val();
+        if (rechargeCardCode) {} else {
+            showMarkTip("请输入正确的兑换卡卡号",2);
+        }
+        postJSON(exchange_api+rechargeCardCode, {}, null, function(res) {
+            //let count = res.value;
+            if (res.content) {
+                alert("兑换成功,"+res.content);
+                $("#rechargeCardCode").val("");
+            }else{
+                alert(res.message);
+            }
+        }, true);
+
+    });
+
+
+
+
+    var checker = null;
+    var btnArray = ['已完成支付', '碰到问题'];
+    mui('body').on("tap", ".paytid", function() {
+        var tid = $(this).attr("tid");
+		//mui.toast("暂停支付了，晚点再来吧");
+		//return;
+        postJSON(rech_create_api + "/" + tid, {}, "正在启动支付宝",
+            function(data) {
+                if (data.status!=0) {
+                    mui.toast("暂停支付了，晚点再来吧");
+                    return;
+                }
+
+                sessionStorage.setItem("tid", tid);
+                sessionStorage.setItem("orderCode", data.content);
+				let payUrl = rech_pay_api + data.content;
+				//redirectPage(payUrl);
+				if(typeof plus=="undefined"){
+					location.href = payUrl;
+				}else{
+					plus.runtime.openURL(payUrl);
+				}
+				         
+				
+				 
+                mui.confirm('正在加载支付宝网页支付，请打开网页并支付。', '支付确认', btnArray, function(e) {
+                    if (e.index == 0) {
+                        mui.alert("正在验证支付结果，如果支付正常稍后会自动到账");
+                    } else {
+                        mui.toast("支付已经取消，需要重新发起");
+                        sessionStorage.removeItem("tid");
+                        sessionStorage.removeItem("orderCode");
+                    }
+                    return true;
+                })
+				
+                
+
+
+            });
+    });
+    var checker = setInterval(function() {
+        checkOrder()
+    }, 4000);
+
+    function checkOrder() {
+        let tid = sessionStorage.getItem("tid");
+        if (tid) {} else {
+            return;
+        }
+        let orderCode = sessionStorage.getItem("orderCode");
+        if (orderCode) {} else {
+            return;
+        }
+        postJSON(rech_check_api + "/" + tid + "/" + orderCode, {}, "",
+            function(data) {
+                if (data.status==0) {
+                    clearInterval(checker);
+                    sessionStorage.removeItem("tid");
+                    sessionStorage.removeItem("orderCode");
+                    alert("支付成功");
+                    clearInterval(checker);
+                }
+            }, false);
+    }
+</script>

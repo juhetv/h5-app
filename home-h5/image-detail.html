@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<!--91福利,92福利,图片-->
+		<title
+			th:text="${movieNetDetailRes.title}+',HD,92福利社-92福利社影院_92福利社天堂_2022最新最好看電影盡在92福利社影院-最全最新的国产亚洲欧美日韩无码免费高清美女图片'">
+		</title>
+		<meta name="keywords"
+			th:content="${movieNetDetailRes.title}+',91福利,92福利社,電影天堂影院,最新電影,最新電視劇,迅雷電影下載,青春電影電視劇迅雷下載,免費成人視頻,美女图片,巨乳中字人妻丝袜诱惑好多水好爽'" />
+		<meta name="description"
+			th:content="${movieNetDetailRes.title}+',92福利社提供最新的高清電影在線觀看和迅雷下載（含青春電影迅雷下載）,92福利社提供快速免費的成人电影与视频。 包括热辣性感女孩与xxx視頻,美女图片。92福利社爭做最好最專業的在線福利影院！(http://www.meitue.shop)'" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet"
+			href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/css/mui.css">
+		<link rel="stylesheet"
+			href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/img_page.css" />
+		<link rel="stylesheet"
+			href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/css/float-btn.css" />
+		<style>
+			.img-shut {
+				margin-left: 2px;
+				width: 100%;
+				height: 100%;
+			}
+
+			.width-50 {
+				width: 49%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="main">
+			<!--mui-bar-transparent -->
+			<header id="header" class="mui-bar main video-header" th:channelName="${movieNetDetailRes.channelName}"
+				th:data-id="${movieNetDetailRes.id}" style="-webkit-box-shadow: 0 0 0px rgb(0 0 0 / 85%);">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title" style="color: white;" th:text="${movieNetDetailRes.title}"></h1>
+			</header>
+
+			<div class="mui-content index-body-color main mui-content-padded" id="wrapper">
+				<div id="" class="beforeVideoStartBg" th:if="not ${vipAuth}">
+					<img th:src="${movieNetDetailRes.cover}" height="100%" width="100%" class="blurt">
+					<div class="unLoginBox login-vid-tip">
+						<p class="textLine" th:if="not ${isLogin}">免费注册 精彩视频免费看</p>
+						<p class="textLine" th:if="not ${isLogin}">赶快加入 体验更多精彩</p>
+						<a type="button" th:if="not ${isLogin}" href="http://meitue.shop/left_content.html?code=login"
+							target="_blank" class="login-vip-btn mui-btn mui-btn-warning">登录/注册</a>
+						<p class="textLine" th:if="${isLogin} and not ${vipAuth}">赶快激活VIP 体验更多精彩</p>
+						<a type="button" th:if="${isLogin} and not ${vipAuth}"
+							href="http://meitue.shop/left_content.html?code=user_center" target="_blank"
+							class="login-vip-btn mui-btn mui-btn-warning">去激活</a>
+					</div>
+				</div>
+				<img th:data-preview-src="'http://images.weserv.nl/?maxage=100d&url='+${item}" th:each="item:${movieNetDetailRes.imgArray}" class="img-shut lazy "
+					data-preview-group="1" th:data-original="'http://images.weserv.nl/?maxage=100d&url='+${item}"
+					onerror="this.src='http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/img/error.png'" />
+			</div>
+			<div class="fed-goto-info">
+				<a class="mui-icon mui-icon-arrowup"  href="javascript:;"></a>
+				<a class="mui-icon mui-icon-star" id="favorite-icon" href="javascript:;"></a>
+				<a class="mui-icon mui-icon-contact" href="http://meitue.shop/left_content.html?code=user_center" target="_blank"></a>
+			</div>
+	</body>
+	<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/mui.min.js"></script>
+	<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/mui.previewimage.js">
+	</script>
+	<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/mui.zoom.js"></script>
+	<script src="https://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+	<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-210/config.js"></script>
+	<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/js/favorite.js"></script>
+	<script>
+		$(function() {
+			if ($("img.lazy").length > 35) {
+				$("img.lazy").addClass('width-50');
+			}
+			$("img.lazy").lazyload({
+				placeholder: "http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-lib/aper-h5-202203/img/lazy.gif",
+				effect: "show"
+			});
+			mui.previewImage();
+			/**
+			 * 
+			 * 
+			 */
+			mui('body').on('tap', '.mui-icon-arrowup', function() {
+				$('body,html').animate({
+				  scrollTop: 0
+				},
+				500);
+				return false;
+			});
+			mui('body').on("tap",".login-vip-btn",function(){
+				window.location.href=("http://meitue.shop/left_content.html?code=user_center");
+			});
+			
+		});
+	</script>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="max-age=10800"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="https://cdn.staticfile.org/mui/3.7.1/js/mui.js"></script>
+    <link href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/mui.css" rel="stylesheet"/>
+    <link href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/video.list.css"/>
+    <link rel="stylesheet" href="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/css/common.css"/>
+    <style>
+        .page_content {
+            padding-top: .3rem;
+            width: 100%;
+            color: #044418;
+        }
+
+        .current_a {
+            color: red;
+        }
+
+        #category_ul li {
+            width: 33%;
+            float: left;
+        }
+
+        #category_ul li a {
+            text-align: center;
+            position: page;
+        }
+
+        #topPopover {
+            width: 90%;
+        }
+
+        #keyword_input {
+            width: 47%;
+            margin: 8px 2px 2px 1px;
+            line-height: 10px;
+            height: 30px;
+            color: #222;
+        }
+
+        .dotdot {
+            max-height: 90px;
+            line-height: 23px;
+            color: #333;
+            font-size: 14px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+        }
+
+        .item_detail {
+            width: 67%;
+            position: relative;
+            padding: 0.2rem 1.1rem 0.5rem 0.8rem
+        }
+
+        .descr-p {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            margin-top: 4px;
+        }
+
+        .mui-table-view-cell {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            vertical-align: middle;
+        }
+
+        .mui-table-view {
+            display: contents;
+        }
+    </style>
+</head>
+<body>
+<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+    <!--主界面部分-->
+    <div class="mui-inner-wrap">
+        <header class="mui-bar mui-bar-nav colour_main">
+            <a id="menu_left_a" href="#offCanvasSide"
+               class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+            <a class="mui-icon mui-icon-reload mui-pull-right" atr="刷新"></a>
+            <a class="mui-icon mui-icon-navigate mui-pull-right" atr="跳页" style="display: ;"></a>
+            <a class="mui-icon mui-action-menu mui-icon-more mui-pull-right" atr="分类/标签列表" style="display: ;"
+               id="host_cate_home" href="#topPopover"></a>
+            <a class="mui-icon mui-action-menu mui-icon-search mui-pull-right" atr="搜索" style="display: ;"></a>
+
+            <h1 class="mui-title page-title"></h1>
+        </header>
+        <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll" id="context_div" style="">
+                <!--视频列表 start -->
+                <div class="page_content" id="v_page">
+                    <ul type="video-ul" class="mui-table-view" v-for="pageData in data "
+                        :channel="pageData.channelName">
+                        <i class="fa fa-tripadvisor" style="width: 100%;height: 1.5rem;margin-left: .4rem;">
+                            {{pageData.pageTip}}
+                        </i>
+                        <li v-for="vd in pageData.items" class="mui-media-half detail-li"
+                            @click="loadVideoDetail(this)" :style="pageData.verticalVar=='1'?'height:19.5rem':''">
+                            <div class="mb-main video-li" :data-href="vd.href" :data-title="vd.title"
+                                 :data-id="vd.id" :data-cover="vd.cover">
+                                <div class="click_li" style="">
+                                    <a>
+
+                                        <div class="a_div_img " style="">
+                                            <img class="m-li-img"
+                                                 :style="pageData.verticalVar=='1'?'height:17.5rem':''"
+
+                                                 onerror="this.src='./img/error.png';this.onerror=null"
+                                                 v-lazy="vd.cover"/>
+                                        </div>
+                                    </a>
+                                    <template v-if="vd.duration!=null">
+                                        <div class="v-search-video-time">
+                                            <i class="fa fa-clock-o">
+                                            </i>
+
+                                            {{vd.duration}}
+                                        </div>
+                                    </template>
+                                </div>
+                                <article>
+                                    <div class="dt-archive-post-content">
+                                    </div>
+                                    <table width="100%">
+                                        <tbody>
+                                        <tr>
+                                            <td width="5%">
+                                            </td>
+                                            <td colspan="2">
+                                                <header class="entry-header" style="font-size: 14px;line-height: 1.3rem;
+															height: 1rem;">
+                                                    <a style="color: #000000;
+										display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:1;overflow: hidden;"
+                                                       rel="bookmark">
+                                                        {{vd.title}}
+                                                    </a>
+                                                </header>
+                                            </td>
+                                        </tr>
+                                        <tr style="line-height: 1.5rem;">
+                                            <td width="5%">
+                                            </td>
+                                            <td align="left">
+                                                <template v-if="vd.publishDay!=null">
+                                                    <p style="font-size: 13px;margin-bottom: 0px;"><i
+                                                            class="fa fa-calendar">
+                                                    </i> {{vd.publishDay}}</p>
+                                                </template>
+                                            </td>
+
+                                            <td width="5%">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </article>
+                            </div>
+                        </li>
+                        <li v-for="vd in pageData.javbusItems" class="mui-media detail-li" style="">
+                            <div class="mb-main video-li" :data-href="vd.href" :data-title="vd.title"
+                                 :data-id="vd.id" :data-code="vd.code" :data-cover="vd.cover"
+                                 style="display: -webkit-inline-box;background-color: white;">
+                                <div class="click_li" style="width:37%;min-height: 11rem;">
+                                    <a>
+                                        <img class="m-li-img" style=" border-radius: 0.3rem;height: 11rem;width: 100%;"
+                                             v-lazy="vd.cover" onerror="this.src='./img/error.png'"/>
+                                    </a>
+                                </div>
+                                <div class="item_detail desc">
+                                    <a class="dotdot line3 image-margin-right">{{vd.title}}</a>
+                                    <p class="descr-p" style="" v-if="vd.descr!=null">{{vd.descr}}</p>
+                                    <div class="item-tag" style="padding-top: 3px;font-size: 12px;">
+                                        <button v-for="t in vd.manualTagArray" style="padding: 1px 2px 1px 1px;
+												font-size: 12px;
+                        	margin-right: 4px;">{{t}}
+                                        </button>
+                                    </div>
+                                    <div class="item_info" style="position: absolute;
+					bottom: 1px;margin-top: 10px;">
+                                        <p class="cmt space" style="">
+                                            {{vd.movieCode+'/'+vd.publishDay}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--视频列表end-->
+            </div>
+        </div>
+        <div class="mui-off-canvas-backdrop"></div>
+    </div>
+    <!--侧滑菜单部分-->
+    <aside id="offCanvasSide" class="mui-off-canvas-left" style="top: -7px;">
+
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <style>
+
+            .mui-table-view-inverted {
+                background-color: #c3c3c3;
+                color: rgb(0, 0, 0);
+                height: 60rem;
+            }
+
+            .parent_li {
+                font-size: 1rem;
+            }
+
+            .mui-table-view-cell {
+                padding: 0.7rem;
+                font-size: 0.8rem;
+                vertical-align: middle;
+            }
+
+            .acitity {
+                background: #777;
+                border-radius: 0.3rem;
+            }
+
+            .left-ul {
+                background: #f5f5f5;
+                height: 50rem;
+            }
+
+            .left-top-item {
+                font-size: 1.1rem;
+                margin: .4rem 0 0 .6rem;
+                color: white;
+                line-height: 2.5rem;
+            }
+        </style>
+
+        <body>
+        <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+
+                <div class="title border-all colour_main">
+
+                    <div class="left-top-item">
+                        <span class="fa fa-firefox" id="about_fls">安卓APP</span>
+                    </div>
+                    <div class="left-top-item">
+                        <span class="fa fa-user-o" id="about_user">个人中心</span>
+                    </div>
+                </div>
+                <div class="left-ul">
+                    <ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+                        <li class="mui-table-view-cell parent_li" style="font-size: 0.9rem;">
+                            美图频道
+                        </li>
+                        <ul class="parentUl">
+
+
+                            <li class="mui-table-view-cell  click_menu" host_id="ikan01">
+                                <span class="fa fa-venus-mars"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;ins正妹推荐</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="aoto11">
+                                <span class="fa fa-venus-double"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;凹凸图库</span>
+                            </li>
+
+
+                        </ul>
+                        <li class="mui-table-view-cell parent_li" style="font-size: 0.9rem;">
+                            电影频道
+                        </li>
+                        <ul class="parentUl">
+
+
+                            <li class="mui-table-view-cell  click_menu" host_id="smmy">
+                                <span class="fa fa-space-shuttle"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;吉吉影院</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="feis">
+                                <span class="fa fa-paw"><a
+                                        class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;绯色视频</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="taos">
+                                <span class="fa fa-google-wallet"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;桃色视界</span>
+                            </li>
+
+
+                        </ul>
+
+                        <li class="mui-table-view-cell parent_li" style="font-size: 0.9rem;">
+                            优质频道(HD高速)
+                        </li>
+                        <ul class="parentUl">
+                            <li class="mui-table-view-cell  click_menu " host_id="uufl">
+                                <span class="fa fa-meetup"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;优优福利</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="kmaa">
+                                <span class="fa fa-space-shuttle"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;快猫破解</span>
+                            </li>
+
+                            <li class="mui-table-view-cell  click_menu" host_id="sifa">
+                                <span class="fa fa-optin-monster"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;私房TV</span>
+                            </li>
+
+                            <li class="mui-table-view-cell  click_menu " host_id="zhai">
+                                <span class="fa fa-fire-extinguisher"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;宅男影院</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="best02">
+                                <span class="fa fa-pied-piper-alt"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;Xvideos高清</span>
+                            </li>
+                            <li class="mui-table-view-cell  click_menu" host_id="best07">
+                                <span class="fa fa-pied-piper-alt"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;Xvideos月度最佳</span>
+                            </li>
+                        </ul>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+
+
+            if (sessionStorage.getItem("vip_exchange") == "1") {
+                mui.confirm('限时促销', 'VIP支付限时促销开放中', ['去充值', '知道了'], function (e) {
+                    if (e.index == 1) {
+                        //mui.alert("正在验证支付结果，如果支付正常稍后会自动到账");
+                    } else {
+                        redirectPage("left_content.html?code=user_center");
+                    }
+                    return true;
+                });
+            }
+            mui('body').on("tap", "#about_fls", function () {
+                redirectPage("down.html?code=about_fls");
+
+            });
+
+            mui('body').on("longtap", "#about_fls", function () {
+                $(".mui-hidden").removeClass("mui-hidden");
+
+            });
+            mui('body').on("tap", "#about_user", function () {
+                redirectPage("left_content.html?code=user_center");
+
+            });
+            mui('body').on("tap", ".parent_li", function () {
+                $(this).next().toggle();
+            });
+
+            mui('body').on("tap", ".click_menu", function () {
+                var host_id = $(this).attr("host_id");
+                mui('#offCanvasWrapper').offCanvas('close');
+                $(".mui-icon-more").show();
+                $(".mui-icon-search").show();
+
+                $(".click_menu").removeClass("acitity");
+                sessionStorage.setItem("channelName", host_id);
+                $(".current_a").removeClass("current_a");
+                sessionStorage.removeItem("keyword");
+                jsonPages.data = [];
+                categoryVue.categoryData = [];
+                loadPage(1);
+                if (category_con[host_id]) {
+                    categoryVue.categoryData = category_con[host_id];
+                } else {
+                    categoryVue.categoryData = category_con["allkeyword"];
+                }
+
+                //console.log("buildHostPage:"+JSON.stringify(categoryVue.categoryData));
+                $(this).addClass("acitity");
+                return false;
+            });
+
+        </script>
+
+    </aside>
+</div>
+<!--右上角弹出菜单-->
+<div id="topPopover" class="mui-popover">
+    <!--    <div class="mui-popover-arrow"></div>-->
+    <div class="mui-scroll-wrapper" style="margin: 1px 0;overflow: initial;">
+        <div class="mui-scroll">
+            <ul class="mui-table-view" id="category_ul">
+                <li class="mui-table-view-cell" v-for="(cate,index) in categoryData" :cate-code="cate.code"
+                    :cate-name="cate.name" :cate-type="cate.type">
+                    <a href="#">{{cate.name}}</a>
+                </li>
+                <li class="mui-table-view-cell"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+        src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/jquery.md5.js"></script>
+<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/common.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.0.0/vue.min.js"></script>
+<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/vue-lazyload.js"></script>
+<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/util.js"></script>
+<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-temp/config.js"></script>
+<script type="text/javascript" src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-temp/category.js"></script>
+
+<script src="http://futuretown.oss-cn-hangzhou.aliyuncs.com/static-libs/js/main_frame.js"></script>
+
+<script>
+    var categoryVue = new Vue({
+        el: '#category_ul',
+        data: {
+            'categoryData': []
+        }
+    });
+    localStorage.setItem("versionCode", 100);
+    buildHostPage();
+    initPage();
+
+    /**
+     * 登录成功后调用
+     * 1、加载正文
+     * 2、加载左边菜单
+     * 3、初始化滑动滚动效果
+     * 4、绑定分类点击事件
+     * 5、绑定文章点击事件
+     */
+    function initPage() {
+        //侧滑容器父节点
+        var offCanvasWrapper = mui('#offCanvasWrapper');
+        //主界面容器
+        var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+        //菜单容器
+        var offCanvasSide = document.getElementById("offCanvasSide");
+        //移动效果是否为整体移动
+        var moveTogether = true;
+        var loading = false;
+        //侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
+        var classList = offCanvasWrapper[0].classList;
+        offCanvasWrapper[0].insertBefore(offCanvasSide, offCanvasWrapper[0].firstElementChild);
+        //主界面和侧滑菜单界面均支持区域滚动；
+        mui('#offCanvasContentScroll').scroll({
+            deceleration: 0.002
+        });
+        mui('#offCanvasSideScroll').scroll({
+            deceleration: 0.002
+        });
+
+        mui('#category_ul').on("tap", "li", function () {
+            mui('#topPopover').popover('hide');
+            if ($(this).hasClass("current_a")) {
+                return;
+            }
+            sessionStorage.removeItem("keyword");
+            $("#category_ul").find("li").removeClass("current_a");
+            $(this).addClass("current_a");
+            jsonPages.data = [];
+            loadPage(1);
+        });
+        mui("body").on('tap', ".video-li", function () {
+            //		loadVideoDetail($(this));
+            if (osType() == 1) {
+                loadVideoDetail(this);
+                // window.location.href = "home.html";
+            } else {
+                alert('请下载APP');
+                window.location.href = "down.html";
+            }
+
+            return false;
+        });
+    }
+
+    var loadingNextPage = false;
+
+    /**
+     * 初始化host页面页面内容
+     * 1、初始化分类数据
+     * 2、加载文章列表
+     * 3、回调时自动登录
+     */
+    function buildHostPage(channelName) {
+        var channelName = getCurrentChannel();
+        jsonPages.data = [];
+        var pageno = sessionStorage.getItem("pageno") || 1;
+        loadPage(pageno);
+        categoryVue.categoryData = [];
+
+        $(".current_a").removeClass("current_a");
+        if (category_con.hasOwnProperty(channelName)) {
+            categoryVue.categoryData = category_con[channelName];
+        } else {
+            categoryVue.categoryData = category_con["allkeyword"];
+        }
+
+    }
+
+
+    $(window).scroll(function () {
+        if (loadingNextPage === false) {
+            let media_li = $(".mui-media")
+            if (media_li.length <= 0) {
+                media_li = $(".mui-media-half");
+            }
+            //console.log(media_li.length);
+            if (media_li.length <= 0) {
+                return;
+            }
+            ;
+            var bottomsubmit = media_li.last().offset().top;
+            var heig = $(window).height();
+            var cont_heig = $("#context_div").height();
+            var nowtop = $(document).scrollTop() + heig;
+            var liMin = $("li").last().height() * (1.8);
+            liMin = liMin < 240 ? 240 : liMin;
+            var liMax = $("li").last().height() * (1.8);
+            liMax = liMax < 500 ? 500 : liMax;
+            if (nowtop - bottomsubmit > liMin && nowtop - bottomsubmit < liMax) {
+                var pageno = parseInt(sessionStorage.getItem("pageno"));
+                loadingNextPage = true;
+                pageno++;
+                loadPage(pageno);
+                return;
+            }
+        }
+    });
+
+    function initLogin() {
+        postJSON(login_api, {}, "",
+            function (data) {
+                if (data.ok) {
+                    clearMemberStorage();
+                    return false;
+                }
+                let member = data.value;
+                loginSuccessLocaCache(member);
+            }, true);
+    }
+
+
+    function osType() {
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            return 1;
+        } else if (/(Android)/i.test(navigator.userAgent)) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
+    /*
+        function  jumpHome() {
+            if (osType()==1){
+               // window.location.href = "home.html";
+            } else{
+                alert('请下载APP');
+                window.location.href = "down.html";
+            }
+        }*/
+</script>
+
+
+</body>
+
+</html>

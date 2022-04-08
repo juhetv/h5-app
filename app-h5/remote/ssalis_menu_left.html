@@ -1,0 +1,229 @@
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<style>
+
+	.mui-table-view-inverted {
+		background-color:#c3c3c3;
+		color: rgb(0, 0, 0);
+		height: 60rem;
+	}
+
+	.parent_li{
+		font-size: 1rem;
+	}
+	.mui-table-view-cell {
+		padding: 0.7rem;
+		font-size: 0.8rem;
+		vertical-align: middle;
+	}
+	.acitity{
+		background: #777;
+		border-radius: 0.3rem;
+	}
+	.left-ul{
+		background: #f5f5f5;height: 60rem;
+	}
+	.left-top-item {
+		font-size: 1.1rem;
+		margin: .4rem 0 0 .6rem;
+		color: white;
+		line-height: 2.5rem;
+	}
+</style>
+
+<body><div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+	<div class="mui-scroll">
+
+		<div class="title border-all colour_main">
+			
+			<div class="left-top-item">
+				<span class="fa fa-firefox" id="about_fls">关于</span>
+			</div>
+			<div class="left-top-item mui-hidden">
+				<span class="fa fa-user-o" id="about_user">个人中心</span>
+			</div>
+		</div>
+		<div class="left-ul" style="">
+			<style>
+
+			</style>
+
+			<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+				<li class="mui-table-view-cell parent_li" style="font-size: 0.9rem;">
+					美图频道
+				</li>
+				<ul class="parentUl" style="display:none">
+
+					<li class="mui-table-view-cell  click_menu"  host_id="ikan01">
+						<span class="fa fa-venus-mars"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;ins正妹推荐</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu  mui-hidden"  host_id="aoto11">
+						<span class="fa fa-venus-double"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;凹凸图库</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu" style="display:;" host_id="tuji01">
+						<span class="fa fa-transgender-alt"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;图集谷</span>
+					</li>
+
+				</ul>
+				<li class="mui-table-view-cell parent_li" style="font-size: 0.9rem;">
+					电影频道
+				</li>
+				<ul class="parentUl">
+
+
+					<li class="mui-table-view-cell  click_menu" host_id="norm">
+						<span class="fa fa-yelp"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;电影正片</span>
+					</li>
+
+					<li class="mui-table-view-cell  click_menu mui-hidden" host_id="smmy">
+						<span class="fa fa-space-shuttle"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;吉吉影院</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu mui-hidden" host_id="feis">
+						<span class="fa fa-paw"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;绯色视频</span>
+					</li>
+					
+					<li class="mui-table-view-cell  click_menu mui-hidden" host_id="taos">
+						<span class="fa fa-google-wallet"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;桃色视界</span>
+					</li>
+					
+
+
+				</ul>
+				
+				<li class="mui-table-view-cell parent_li mui-hidden" style="font-size: 0.9rem;">
+					优质频道(HD高速)
+				</li>
+				<ul class="parentUl mui-hidden"  >
+					<li class="mui-table-view-cell  click_menu "   parentid="videoul" host_id="uufl">
+						<span class="fa fa-meetup"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;优优福利</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu "   parentid="videoul" host_id="xiao">
+                                                <span class="fa fa-meetup"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;小视频</span>
+                                        </li>
+
+
+					<li class="mui-table-view-cell  click_menu "   parentid="videoul" host_id="kmaa">
+						<span class="fa fa-video-camera"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;快猫视频</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu"   host_id="shor">
+						<span class="fa fa-fire-extinguisher"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;六九短片</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu"   host_id="long">
+						<span class="fa fa-signing"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;六九长片</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu"  host_id="sifa">
+						<span class="fa fa-asl-interpreting"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;私房社</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu"  host_id="zhai">
+						<span class="fa fa-optin-monster"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;宅男影院</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu mui-hidden"  host_id="best02">
+						<span class="fa fa-pied-piper-alt"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;Xvideos高清</span>
+					</li>
+					<li class="mui-table-view-cell  click_menu mui-hidden"  host_id="best07">
+						<span class="fa fa-pied-piper-alt"><a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;Xvideos月度最佳</span>
+					</li>
+					
+
+
+				</ul>
+				
+				<li class="mui-table-view-cell parent_li mui-hidden" style="font-size: 0.9rem;">
+					种子番号库
+				</li>
+				<ul class="parentUl mui-hidden" style="">
+					<li class="mui-table-view-cell  click_menu" host_id="seedm">
+										<span class="fa fa-snowflake-o">
+											<a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;有码影片
+										</span>
+					</li>
+
+					<li class="mui-table-view-cell  click_menu" host_id="seedw">
+										<span class="fa fa-bug">
+											<a class="mui-navigate-right"></a>&nbsp;&nbsp;&nbsp;&nbsp;无码影片
+										</span>
+					</li>
+
+
+				</ul>
+			</ul></div>
+	</div>
+</div>
+<script>
+
+
+    mui.getJSON("manifest.json", null, function (data) {
+        let vum = data.version.code;
+        localStorage.setItem("versionCode",vum);
+
+        if(vum<=14){
+            //alert("app有更新，请及时下载最新版本");
+            //plus.runtime.openURL("https://92av.lanzous.com/i7D79nngfna");
+            //plus.runtime.quit();
+
+        }
+
+    })
+    if(sessionStorage.getItem("vip_exchange")=="1"){
+        mui.confirm('限时促销', 'VIP支付限时促销开放中', [ '去充值','知道了'], function(e) {
+            if (e.index == 1) {
+                //mui.alert("正在验证支付结果，如果支付正常稍后会自动到账");
+            } else {
+                redirectPage("left_content.html?code=user_center");
+            }
+            return true;
+        });
+    }
+    mui('body').on("tap","#about_fls",function(){
+        //redirectPage("left_content.html?code=about_fls");
+		alert("仿开源影院");
+    });
+
+    mui('body').on("longtap","#about_fls",function(){
+        $(".mui-hidden").removeClass("mui-hidden");
+
+    });
+    mui('body').on("tap","#about_user",function(){
+        redirectPage("left_content.html?code=user_center");
+
+    });
+    mui('body').on("tap",".parent_li",function(){
+        $(this).next().toggle();
+    });
+
+    mui('body').on("tap",".click_menu",function(){
+        var host_id = $(this).attr("host_id");
+        if(host_id=="mnyj"||host_id=="kmaa"||host_id.indexOf("1296")>=0
+            ||host_id=="tutu"||host_id =="ikanins"
+        ){
+
+            if(localStorage.getItem("versionCode")<=18){
+                alert("当前版本不支持，请及时下载最新版本");
+                plus.runtime.openURL(downapk_url);
+                return;
+                //plus.runtime.quit();
+            }
+
+        }
+        mui('#offCanvasWrapper').offCanvas('close');
+        $(".mui-icon-more").show();
+        $(".mui-icon-search").show();
+
+        $(".click_menu").removeClass("acitity");
+        sessionStorage.setItem("channelName",host_id);
+        $(".current_a").removeClass("current_a");
+        sessionStorage.removeItem("keyword");
+        jsonPages.data=[];
+        categoryVue.categoryData=[];
+        loadPage(1);
+        if(category_con[host_id]){
+            categoryVue.categoryData=category_con[host_id];
+        }else{
+            categoryVue.categoryData=category_con["allkeyword"];
+        }
+
+        //console.log("buildHostPage:"+JSON.stringify(categoryVue.categoryData));
+        $(this).addClass("acitity");
+        return false;
+    });
+
+</script>
